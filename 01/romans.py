@@ -10,3 +10,4 @@ def int_to_roman(numero):
             resultado += simbolo
             numero -= valor
     return resultado
+print(int_to_roman(1000))
