@@ -10,6 +10,3 @@ def int_to_roman(numero):
             resultado += simbolo
             numero -= valor
     return resultado
-
-for numero in range(1, 4000):
-    print(f'{numero}: {int_to_roman(numero)}')
