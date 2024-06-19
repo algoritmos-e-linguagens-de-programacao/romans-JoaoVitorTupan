@@ -34,8 +34,19 @@ class RomanConverter:
 
 # Exemplo de uso:
 converter = RomanConverter()
-roman_number = "MMMCMXCIX"
-decimal_number = 3999
 
-print(f"{roman_number} em decimal é {converter.roman_to_decimal(roman_number)}")
-print(f"{decimal_number} em romano é {converter.decimal_to_roman(decimal_number)}")
+# Teste de conversão de romano para decimal
+try:
+    roman_number = "MMMCMXCIX"
+    decimal_result = converter.roman_to_decimal(roman_number)
+    print(f"{roman_number} em decimal é {decimal_result}")
+except ValueError as e:
+    print(e)
+
+# Teste de conversão de decimal para romano
+try:
+    decimal_number = 3999
+    roman_result = converter.decimal_to_roman(decimal_number)
+    print(f"{decimal_number} em romano é {roman_result}")
+except ValueError as e:
+    print(e)
