@@ -1,3 +1,37 @@
+name: Roman Converter
+
+on:
+  workflow_dispatch:
+    inputs:
+      roman_number:
+        description: 'Número romano para converter para decimal'
+        required: false
+        default: ''
+      decimal_number:
+        description: 'Número decimal para converter para romano'
+        required: false
+        default: ''
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+
+    - name: Run Roman Converter
+      run: |
+        python -c "
 class RomanConverter:
     def __init__(self):
         self.roman_to_decimal_map = {
@@ -24,7 +58,7 @@ class RomanConverter:
 
     def decimal_to_roman(self, number):
         if number <= 0 or number >= 4000:
-            raise ValueError("Número fora do intervalo (1-3999)")
+            raise ValueError('Número fora do intervalo (1-3999)')
         result = []
         for value, numeral in self.decimal_to_roman_map:
             while number >= value:
@@ -32,21 +66,22 @@ class RomanConverter:
                 number -= value
         return ''.join(result)
 
-# Exemplo de uso:
 converter = RomanConverter()
+roman_number = '${{ github.event.inputs.roman_number }}'
+decimal_number = ${{ github.event.inputs.decimal_number }}
 
-# Teste de conversão de romano para decimal
-try:
-    roman_number = "MMMCMXCIX"
-    decimal_result = converter.roman_to_decimal(roman_number)
-    print(f"{roman_number} em decimal é {decimal_result}")
-except ValueError as e:
-    print(e)
+if roman_number:
+    try:
+        decimal_result = converter.roman_to_decimal(roman_number)
+        print(f'{roman_number} em decimal é {decimal_result}')
+    except ValueError as e:
+        print(e)
 
-# Teste de conversão de decimal para romano
-try:
-    decimal_number = 3999
-    roman_result = converter.decimal_to_roman(decimal_number)
-    print(f"{decimal_number} em romano é {roman_result}")
-except ValueError as e:
-    print(e)
+if decimal_number:
+    try:
+        decimal_result = int(decimal_number)
+        roman_result = converter.decimal_to_roman(decimal_result)
+        print(f'{decimal_result} em romano é {roman_result}')
+    except ValueError as e:
+        print(e)
+        "
