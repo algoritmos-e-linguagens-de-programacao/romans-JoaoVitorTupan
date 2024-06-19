@@ -1,5 +1,4 @@
 def int_to_roman(num):
-    # Tabela de valores dos algarismos romanos
     val = [
         1000, 900, 500, 400,
         100, 90, 50, 40,
@@ -22,7 +21,6 @@ def int_to_roman(num):
     return roman_num
 
 def roman_to_int(s):
-    # Tabela de valores dos algarismos romanos
     roman = {
         'I': 1, 'V': 5, 'X': 10, 'L': 50,
         'C': 100, 'D': 500, 'M': 1000,
@@ -32,7 +30,6 @@ def roman_to_int(s):
     i = 0
     num = 0
     while i < len(s):
-        # Verifica se um par especial está presente
         if i + 1 < len(s) and s[i:i+2] in roman:
             num += roman[s[i:i+2]]
             i += 2
@@ -41,6 +38,5 @@ def roman_to_int(s):
             i += 1
     return num
 
-# Exemplos de uso
 print(int_to_roman(1994))  # Deve retornar 'MCMXCIV'
 print(roman_to_int("MCMXCIV"))  # Deve retornar 1994
